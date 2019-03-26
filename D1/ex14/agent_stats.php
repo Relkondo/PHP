@@ -1,84 +1,54 @@
 #!/usr/bin/php
 <?php
-if ($argc != 2)
-	return ;
-$tab = file('php://stdin');
-array_splice($tab, 0, 1);
-if ($argv[1] == "moyenne")
-{
-	$i = 0;
-	foreach ($tab as $elem)
-	{
-		$res = explode(";", $elem);
-		if ($res[1] != NULL && $res[2] != "moulinette")
-		{
-			$moy += $res[1];
-			$i++;
-		}
-	}
-	echo $moy / $i."\n";
-}
-else if ($argv[1] == "moyenne_user")
-{
-	sort($tab);
-	foreach ($tab as $key => $value)
-	{
-		$tmp = explode(";", $value);
-		$res[$tmp[0]][$key] = $value;
-	}
-	foreach ($res as $user)
-	{
-		$i = 0;
-		$sum_us = 0;
-		$moy = 0;
-		foreach ($user as $elem)
-		{
-			$note = explode(";", $elem);
-			if ($note[1] != NULL && $note[2] != "moulinette")
-			{
-				$sum_us += $note[1];
-				$i++;
-			}
-		}
-		if ($i != 0)
-		{
-			$moy = $sum_us / $i;
-			echo $note[0].":".$moy."\n";
-		}
-	}
-}
-else if ($argv[1] == "ecart_moulinette")
-{
-	sort($tab);
-	foreach ($tab as $key => $value)
-	{
-		$tmp = explode(";", $value);
-		$res[$tmp[0]][$key] = $value;
-	}
-	foreach ($res as $user)
-	{
-		$i = 0;
-		$sum_us = 0;
-		$moy = 0;
-		$moul = 0;
-		foreach ($user as $elem)
-		{
-			$note = explode(";", $elem);
-			if ($note[1] != NULL && $note[2] != "moulinette")
-			{
-				$sum_us += $note[1];
-				$i++;
-			}
-			if ($note[2] == "moulinette")
-				$moul = $note[1];
-		}
-		if ($i != 0)
-		{
-			$moy = $sum_us / $i;
-			echo $note[0].":".($moy - $moul)."\n";
-		}
-	}
-}
-else
-	return ;
-?>
+    if ($argc != 2)
+        exit();
+
+    $line = array();
+    $user = array();
+    $stdin = fopen('php://stdin', 'r');
+    fgets($stdin);
+    while ($stdin && !feof($stdin)) {
+        $tmp = explode(";", fgets($stdin));
+        if (count($tmp) == 4) {
+            $line[] = $tmp;
+            if (!array_key_exists($tmp[0], $user)) {
+                $user[$tmp[0]] = null;
+                $user[$tmp[0]]['total'] = 0;
+                $user[$tmp[0]]['count'] = 0;
+                $user[$tmp[0]]['moulinette'] = 0;
+            }
+        }
+    }
+
+    ksort($user);
+
+    if ($argv[1] === "moyenne") {
+        $total = 0;
+        $count = 0;
+        foreach ($line as $v) {
+            if ($v[2] !== "moulinette" && $v[1] !== '') {
+                $count++;
+                $total += $v[1];
+            }
+        }
+        echo ($total / $count) . "\n";
+    } else if ($argv[1] === "moyenne_user" || $argv[1] === "ecart_moulinette") {
+        foreach ($line as $v) {
+            if ($v[1] !== '' && $v[2] !== "moulinette") {
+                $user[$v[0]]['count'] += 1;
+                $user[$v[0]]['total'] += $v[1];
+            } else if ($v[2] === "moulinette"){
+                $user[$v[0]]['moulinette'] = $v[1];
+            }
+        }
+
+        if ($argv[1] === "moyenne_user") {
+            foreach ($user as $k => $v) {
+                echo $k . ":" . ($v['total'] / $v['count']) . "\n";
+            }
+        } else {
+            foreach ($user as $k => $v) {
+                echo $k . ":" . (($v['total'] / $v['count']) - $v['moulinette']) . "\n";
+            }
+        }
+    }

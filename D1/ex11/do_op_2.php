@@ -1,63 +1,35 @@
 #!/usr/bin/php
 <?php
-if ($argc != 2)
-	echo "Incorrect Parameters\n";
-else
-{
-	$i = 0;
-	if (strpos($argv[1], "+") !== FALSE)
-	{
-		$tab = explode("+", $argv[1]);
-		$i = 1;
-	}
-	else if (strpos($argv[1], "-") !== FALSE)
-	{
-		$tab = explode("-", $argv[1]);
-		$i = 2;
-	}
-	else if (strpos($argv[1], "/") !== FALSE)
-	{
-		$tab = explode("/", $argv[1]);
-		$i = 3;
-	}
-	else if (strpos($argv[1], "*") !== FALSE)
-	{
-		$tab = explode("*", $argv[1]);
-		$i = 4;
-	}
-	else if (strpos($argv[1], "%") !== FALSE)
-	{
-		$tab = explode("%", $argv[1]);
-		$i = 5;
-	}
-	else
-	{
-		echo "Syntax Error\n";
-		exit();
-	}
-	if (count($tab) != 2)
-		echo "Syntax Error\n";
-	else
-	{
-		foreach ($tab as $elem)
-			$res[] = trim($elem);
-		if (!is_numeric($res[0]) || !is_numeric($res[1]))
-		{
-			echo "Syntax Error\n";
-			return ;
-		}
-		if ($i == 1)
-			echo ($res[0] + $res[1])."\n";
-		else if ($i == 2)
-			echo ($res[0] - $res[1])."\n";
-		else if ($i == 3 && $res[1] != 0)
-			echo ($res[0] / $res[1])."\n";
-		else if ($i == 4)
-			echo ($res[0] * $res[1])."\n";
-		else if ($i == 5)
-			echo ($res[0] % $res[1])."\n";
-		else
-			echo "Syntax Error\n";
-	}
-}
-?>
+    if ($argc != 2) {
+        echo "Incorrect Parameters\n";
+        exit();
+    }
+    $calcule = str_replace(" ", "", $argv[1]);
+    $nb1 = intval($calcule);
+    $op = substr(substr($calcule, strlen((string)$nb1)), 0, 1);
+    $nb2 = substr(substr($calcule, strlen((string)$nb1)), 1);
+    if (!is_numeric($nb1) || !is_numeric($nb2)){
+        echo "Syntax Error\n";
+        exit();
+    }
+    switch ($op) {
+        case ("*") :
+            echo $nb1 * $nb2;
+            break;
+        case ("+") :
+            echo $nb1 + $nb2;
+            break;
+        case ("-") :
+            echo $nb1 - $nb2;
+            break;
+        case ("/") :
+            echo $nb1 / $nb2;
+            break;
+        case ("%") :
+            echo $nb1 % $nb2;
+            break;
+        default:
+            echo "Syntax Error\n";
+            exit();
+    }
+    echo "\n";

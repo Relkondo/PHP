@@ -1,13 +1,8 @@
-#!/usr/bin/php
 <?php
-
-function	ft_is_sort($tab)
-{
-	$res = $tab;
-	sort($res);
-	if ($tab == $res)
-		return (TRUE);
-	else
-		return (FALSE);
-}
-?>
+    function ft_is_sort($array){
+        $array_sort = $array;
+        sort($array_sort);
+        if (array_diff_assoc($array_sort, $array) == null)
+            return true;
+        return false;
+    }

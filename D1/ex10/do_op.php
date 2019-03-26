@@ -1,41 +1,24 @@
 #!/usr/bin/php
 <?php
-if ($argc < 2)
-	echo "Incorrect Parameters\n";
-else
-{
-	$arg1 = trim($argv[1]);
-	$arg2 = trim($argv[2]);
-	$arg3 = trim($argv[3]);
-
-	if ($arg2 == "+")
-	{
-		$res = $arg1 + $arg3;
-		echo $res."\n";
-	}
-
-	if ($arg2 == "-")
-	{
-		$res = $arg1 - $arg3;
-		echo $res."\n";
-	}
-
-	if ($arg2 == "/")
-	{
-		$res = $arg1 / $arg3;
-		echo $res."\n";
-	}
-
-	if ($arg2 == "*")
-	{
-		$res = $arg1 * $arg3;
-		echo $res."\n";
-	}
-
-	if ($arg2 == "%")
-	{
-		$res = $arg1 % $arg3;
-		echo $res."\n";
-	}
-}
-?>
+    if ($argc != 4) {
+        echo "Incorrect Parameters\n";
+        exit();
+    }
+    switch (trim($argv[2], " \t")) {
+        case ("*") :
+            echo trim($argv[1], " \t") * trim($argv[3], " \t");
+            break;
+        case ("+") :
+            echo trim($argv[1], " \t") + trim($argv[3], " \t");
+            break;
+        case ("-") :
+            echo trim($argv[1], " \t") - trim($argv[3], " \t");
+            break;
+        case ("/") :
+            echo trim($argv[1], " \t") / trim($argv[3], " \t");
+            break;
+        case ("%") :
+            echo trim($argv[1], " \t") % trim($argv[3], " \t");
+            break;
+    }
+    echo "\n";
