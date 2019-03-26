@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?php
-
-echo trim(preg_replace("/\s+/", " ", $argv[1]))."\n";
+if ($argc == 2) {$arr = array_filter(explode(' ', $argv[1]));
+foreach($arr as $elem)
+	$res .= $elem." ";
+echo trim($res)."\n";}
 ?>

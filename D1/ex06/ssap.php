@@ -1,29 +1,16 @@
 #!/usr/bin/php
 <?php
-
-function ft_split($str)
-{
-    $tab = explode(" ", $str);
-    $result = array();
-    foreach ($tab as $elem)
-    {
-        if ($elem != "")
-            array_push($result, $elem);
-    }
-    sort($result);
-    return ($result);
+if ($argc > 1) {
+unset($argv[0]);
+foreach ($argv as $arg){
+	$arg = array_filter(explode(' ', $arg));
+	foreach ($arg as $v)
+		$arr[] = $v;
 }
-
-$res = array();
-foreach($argv as $arg)
-{
-    if ($arg != $argv[0])
-    {
-        $tab = ft_split($arg);
-        $res = array_merge($res, $tab);
-    }
+if ($arr) {
+sort($arr);
+foreach ($arr as $elem)
+	echo $elem."\n";
 }
-sort($res);
-foreach ($res as $elem)
-    echo $elem."\n";
+}
 ?>
