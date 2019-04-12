@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-
 while (1)
 {	
 	echo "Entrez un nombre: ";

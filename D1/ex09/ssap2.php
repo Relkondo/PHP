@@ -1,52 +1,51 @@
 #!/usr/bin/php
 <?php
+function ft_split($arr)
+{
+	$arr = array_filter(explode(" ", $arr));
+	$arr = array_merge($arr);
+	return ($arr);
+}
 
-    function is_sort($a, $b)
-    {
-        $a = strtolower($a);
-        $b = strtolower($b);
-        $sort = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-        $length = strlen($a) < strlen($b) ? strlen($a) : strlen($b);
-        for ($i = 0; $i < $length; $i++)
-        {
-            $aa = substr($a, $i, 1);
-            $bb = substr($b, $i, 1);
-            $ia = array_search($aa, $sort);
-            $ib = array_search($bb, $sort);
-            $ia = $ia === false ? ord($aa) + 100 : $ia ;
-            $ib = $ib === false ? ord($bb) + 100 : $ib ;
-            if ($ib < $ia)
-                return false;
-            if ($ib > $ia)
-                return true;
-        }
-        return strlen($a) <= strlen($b) ? true : false;
-    }
+function ft_convert($ord)
+{
+	if ($ord >= 65 && $ord <= 90)
+		return ($ord - 65);
+	else if ($ord >= 97 && $ord <= 122)
+		return ($ord - 97);
+	else if ($ord >= 48 && $ord <= 57)
+		return ($ord - 22);
+	else if ($ord >= 33 && $ord <= 47)
+		return ($ord + 3);
+	else if ($ord >= 58 && $ord <= 64)
+		return ($ord - 7);
+	else if ($ord >= 91 && $ord <= 96)
+		return ($ord - 33);
+	else if ($ord >= 123)
+		return ($ord - 59);
+}
 
-    function is_not_null($val){
-        if ($val === "0")
-            return true;
-        return !($val === null || empty($val));
-    }
+function ft_sort_special($a, $b)
+{
+	$i = 0;
+	while (ft_convert(ord($a[$i])) == ft_convert(ord($b[$i])) && $i < strlen($a) && $i < strlen($b))
+		$i++;
+	$a_o = ft_convert(ord($a[$i]));
+	$b_o= ft_convert(ord($b[$i]));
+	if ($a_o > $b_o)
+		return (1);
+	else if ($a_o < $b_o)
+		return (-1);
+	return (0);
+}
 
-    $array = array();
-    unset($argv[0]);
-    foreach($argv as $v){
-        $tmp = array_filter(explode(" ", $v), 'is_not_null');
-        foreach ($tmp as $v2)
-            $array[] = $v2;
-    }
-    for ($i = 0; $i < count($array) - 1;)
-    {
-        if (is_sort($array[$i], $array[$i + 1])) {
-            $i++;
-        } else {
-            $temp = $array[$i];
-            $array[$i] = $array[$i + 1];
-            $array[$i + 1] = $temp;
-            $i = 0;
-        }
-    }
-
-    foreach ($array as $v)
-        echo $v."\n";
+if ($argc > 1)
+{
+	$mrged = array();
+	unset ($argv[0]);
+	foreach ($argv as $ar)
+		$mrged = array_merge($mrged, ft_split($ar));
+	uasort($mrged, "ft_sort_special");
+	foreach ($mrged as $el)
+		echo ($el."\n");
+}

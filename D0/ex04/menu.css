@@ -9,7 +9,8 @@ a {
 	text-decoration: none;
 }
 
-#menu-img {
+img {
+	margin-left: 4%;
 }
 
 #menu > li,

@@ -4,7 +4,7 @@
 $i = -1;
 
 while (++$i < 1000)
-	echo "X";
+		echo "X";
 echo "\n";
 
 ?>

@@ -1,0 +1,6 @@
+
+<- Obstacle ----------------------------------------------------------------------
+Obstacle is an extension of MapObject and represents  an obstacle on the map.
+
+It has no parameters ; its size and location are generated randomly.
+---------------------------------------------------------------------- Obstacle ->
