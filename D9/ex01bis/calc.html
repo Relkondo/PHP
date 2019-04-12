@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Calkoulator</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+$(function() {
+
+	var form = $("#calcul");
+
+	function result(value) {
+		alert(value);
+		console.log(value);
+	}
+
+	function isPosInt(nb) {
+		if (isNaN(nb) || parseInt(nb) != Number(nb))
+			return false;
+		return true;
+	}
+
+	form.submit(function (event) {
+		event.preventDefault();
+		var nb1 = $(this).find("input[name=nb1]").val();
+		var nb2 = $(this).find("input[name=nb2]").val();
+		var ope = $(this).find("select[name=ope]").val();
+		if (isPosInt(nb1) == false || isPosInt(nb2) == false) {
+			alert("Error :(");
+			return false;
+		}
+		nb1 = parseInt(nb1);
+		nb2 = parseInt(nb2);
+		if (nb1 < 0 || nb2 < 0) {
+			alert("Error :(");
+			return false;
+		}
+		if ((ope == "%" || ope == "/") && nb2 == 0)
+			result("It's over 9000!");
+		else if (ope == "/")
+			result(nb1 / nb2);
+		else if (ope == "%")
+			result(nb1 % nb2);
+		else if (ope == "*")
+			result(nb1 * nb2);
+		else if (ope == "+")
+			result(nb1 + nb2);
+		else if (ope == "-")
+			result(nb1 - nb2);
+		return false;
+	});
+});
+setInterval(function () { alert("Please, use me...");}, 30000);
+		</script>
+	</head>
+	<body>
+		<form id="calcul" name="calcul">
+			<input type="text" name="nb1" required>
+			<select name="ope">
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">*</option>
+				<option value="/">/</option>
+				<option value="%">%</option>
+			</select>
+			<input type="text" name="nb2" required>
+			<input type="submit" value="Try me!">
+		</form>
+	</body>
+</html>

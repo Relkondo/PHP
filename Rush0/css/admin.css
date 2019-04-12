@@ -1,0 +1,42 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+  }
+
+  
+  .col-25 {
+    padding: 0 16px;
+    flex: 25%;
+  }
+  
+  .container {
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    width: 500px;
+  }
+
+  span.option {
+    float: right;
+  }
+
+  
+  @media (max-width: 800px) {
+    .row {
+      flex-direction: column-reverse;
+    }
+    .col-25 {
+      margin-bottom: 20px;
+    }
+  }
+  #toggleMe {
+    display: none;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+  }
+  #toggleControl:checked ~ #toggleMe {
+    display: block;
+  }

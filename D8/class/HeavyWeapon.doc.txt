@@ -1,0 +1,10 @@
+
+<- HeavyWeapon ----------------------------------------------------------------------
+
+The HeavyWeapon creates a heavy weapon suited to Heavy Ship.
+
+It is part of a HeavyShip parameters
+
+It takes shoot and range as parameters.
+
+---------------------------------------------------------------------- HeavyWeapon ->

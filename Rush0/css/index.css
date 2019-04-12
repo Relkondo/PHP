@@ -1,0 +1,51 @@
+body{
+    background: #F2994A;
+
+}
+
+.container {
+    margin: auto;
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    width: auto;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+  }
+
+  .col-25 {
+    padding: 0 16px;
+    flex: 25%;
+  }
+  
+
+.hear {
+    background: linear-gradient(to right, #F2C94C, #F2994A); 
+    overflow: hidden;
+    padding: 20px 10px;
+  }
+
+  .hear a:hover {
+    background-color: rgb(235, 221, 159);
+    color: rgb(5, 4, 4);
+  }
+  .hear a {
+    float: left;
+    color: rgb(68, 66, 66);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  .hear a.logo {
+    font-size: 25px;
+    font-weight: bold;
+  }

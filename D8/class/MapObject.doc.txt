@@ -1,0 +1,8 @@
+
+<- MapObject ----------------------------------------------------------------------
+MapObject creates an object on the map, obstacle or spaceship.
+
+It needs the name, position (x, y), the width and the height of the object. 
+
+It is an abstract class.
+---------------------------------------------------------------------- MapObject ->
