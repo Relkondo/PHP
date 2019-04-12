@@ -1,8 +1,0 @@
-
-<- Spaceship ----------------------------------------------------------------------
-The Spaceship class creates a Spaceship. It is an extension of MapObject.
-
-It is also an abstract class.
-
-It handles the effect of the different phases on the ships.
----------------------------------------------------------------------- Spaceship ->
